@@ -14,6 +14,7 @@ var options = {
     silent: false,
     paths: [],
     color: true,
+    compileCss: false,
     strictImports: false
 };
 
@@ -42,6 +43,9 @@ args = args.filter(function (arg) {
             break;
         case 'strict-imports':
             options.strictImports = true;
+            break;
+        case 'compile-css':
+            options.compileCss = true;
             break;
         case 'h':
         case 'help':
@@ -97,6 +101,7 @@ var parseLessFile = function (e, data) {
         paths: [path.dirname(input)].concat(options.paths),
         optimization: options.optimization,
         filename: input,
+        compileCss: options.compileCss,
         strictImports: options.strictImports
     }).parse(data, function (err, tree) {
         if (err) {
